@@ -1,0 +1,20 @@
+{
+
+  "description": "Adds a button to youtube videos allowing for windowed-fullscreen mode",
+  "manifest_version": 2,
+  "name": "Youtube Windowed-fullscreen mode",
+  "version": "1.0",
+  "homepage_url": "https://github.com/MixedPebble/Youtube-windowed-Fullscreen",
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/watch*"],
+      "js": ["content_scripts/windowedFullScreen.js"]
+    }
+  ]
+
+}
