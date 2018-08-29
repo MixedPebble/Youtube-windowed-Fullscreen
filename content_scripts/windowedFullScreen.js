@@ -9,10 +9,20 @@ console.log("START");
 var viewArray = document.getElementsByClassName("ytp-right-controls");
 var rightControls = viewArray[0];
 var btn = copyTheaterButton();
+
 //var btn = customWindowFullScreenButton();//Alternate way to get button
 btn.addEventListener("click",function(){
-    var strWindowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no";
-    windowObjectReference = window.open("http://www.cnn.com/", "CNN_WindowName", strWindowFeatures);
+    var strWindowFeatures = "'location=yes,height=500,width=500,scrollbars=no,status=yes'";
+    //windowObjectReference = window.open("http://www.cnn.com/", "CNN_WindowName", strWindowFeatures);
+    //'location=yes,height=500,width=600,scrollbars=no,status=yes'
+    var URL = window.location.href;
+    if(URL.includes("&")){
+        URL = "https://www.youtube.com/embed/"+URL.substring(URL.indexOf("?v=")+3,URL.indexOf("&"));
+    } else {
+        URL = "https://www.youtube.com/embed/"+URL.substring(URL.indexOf("?v=")+3,URL.Length);
+
+    }
+    window.open(URL, 'Partial Fullscreen', strWindowFeatures);
 })
 rightControls.appendChild(btn);
 console.log("FINISH"); //Useful for seeing if the script crashed early for whatever reason.
@@ -20,10 +30,7 @@ console.log("FINISH"); //Useful for seeing if the script crashed early for whate
 
 
 /*
-Creates a copy of existing Youtube button then alters it. 
-It is to be placed in Youtube video window.
-This is one of two ways that I am considering using for the button.
-The other way is: customWindowFullScreenButton
+Creates a copy of existing Youtube button then alters it.
 */
 function copyTheaterButton(){
     var temp = document.getElementsByClassName("ytp-size-button ytp-button");
@@ -32,9 +39,7 @@ function copyTheaterButton(){
     return temp3;
 }
 /*
-Creates a new button to be placed in Youtube video window.
-This is one of two ways that I am considering using for creating the button.
-The other way is: copyTheaterButton()
+Alternate method to create a copy of existing Youtube button then alters it.
 */
 function customWindowFullScreenButton(){
 var btn = document.createElement("BUTTON");
@@ -43,6 +48,5 @@ btn.setAttribute('viewBox', '0 0 36 36');
 btn.innerHTML='<img src="http://www.sandcmemories.com/t/Tsukineko/Brilliance_Dew_Drop_Spot_Pearlescent_Sky_Blue.gif" />';
 return btn;
 }
-
 
 
